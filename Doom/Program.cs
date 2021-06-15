@@ -18,8 +18,8 @@ namespace Doom
         public static bool saveCursorVisible;
 
         //Variveis do jogador
-        public static float fPlayerX = 0.0f;
-        public static float fPlayerY = 0.0f;
+        public static float fPlayerX = 8.0f;
+        public static float fPlayerY = 8.0f;
         public static float fPlayerAng = 0.0f;
 
         //Variaveis do mapa
@@ -84,9 +84,32 @@ namespace Doom
                         //Testa se o raio de visão esta fora da area andavel
                         if (nTestX < 0 || nTestX >= nMapH || nTestY < 0 || nTestY >= nMapW)
                         {
+                            //Fora do mapa
                             bHitWall = true;
                             fDistanceToWall = fDepth;
                         }
+                        else
+                        {
+                            //Bateu em uma parede
+                            if (map[nTestX * nMapW + nTestX] == '#')
+                            {
+                                bHitWall = true;
+                            }
+                        }
+                    }
+
+                    //Calcula distancia do chao e do teto pegando o ponto médio da tela como base
+                    int nCeiling = (int)((float)(nScreenHeight / 2.0) - nScreenHeight / ((float)fDistanceToWall));
+                    int nFloor = nScreenHeight - nCeiling;
+
+                    for ( int j = 0; j < nScreenHeight; j++)
+                    {
+                        if (j < nCeiling)                       //Eh chao
+                            screen[(int)fEyeY * nScreenWidth + i] = ' ';
+                        else if(j > nCeiling && j <= nFloor)    //Eh parede
+                            screen[(int)fEyeY * nScreenWidth + i] = '#';
+                        else                                    //Eh chao
+                            screen[(int)fEyeY * nScreenWidth + i] = '.';
                     }
 
                 }
