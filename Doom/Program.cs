@@ -11,12 +11,6 @@ namespace Doom
         public static int nScreenWidth = 120;
         public static int nScreenHeight = 40;
 
- //       public static int saveBufferWidth;
- //       public static int saveBufferHeight;
-        public static int saveWindowHeight;
-        public static int saveWindowWidth;
-        public static bool saveCursorVisible;
-
         //Variveis do jogador
         public static float fPlayerX = 8.0f;
         public static float fPlayerY = 8.0f;
@@ -30,11 +24,19 @@ namespace Doom
         public static float fFOV = 3.14159f/4;  //90º
         public static float fDepth = 16.0f;     //Distancia de visao
 
-        
+        public static ConsoleKeyInfo keyIn;
+
         public static void Main()
         {
             StringBuilder screen = new StringBuilder(nScreenWidth * nScreenHeight);
+            for (int a = 0; a < nScreenWidth * nScreenHeight; a++)
+                screen.Append(' ');
 
+
+
+            Console.SetWindowSize(nScreenWidth, nScreenHeight);
+            Console.SetBufferSize(nScreenWidth, nScreenHeight);
+            ConsoleKeyInfo inputPlayer;
 
             StringBuilder map = new StringBuilder(nMapW * nMapH);
             map.Append("################");
@@ -55,8 +57,13 @@ namespace Doom
             map.Append("#..............#");
             map.Append("################");
 
-            do
+            ConsoleKey consoleKey;
+
+            while(true)
             {
+                Console.Clear();
+
+
                 for (int i = 0; i < nScreenWidth; i++)
                 {
                     //A visão do usuário será composta de um conjunto de "raios" que batem
@@ -105,15 +112,20 @@ namespace Doom
                     for ( int j = 0; j < nScreenHeight; j++)
                     {
                         if (j < nCeiling)                       //Eh chao
-                            screen[(int)fEyeY * nScreenWidth + i] = ' ';
+                            screen[j * nScreenWidth + i] = ' ';
                         else if(j > nCeiling && j <= nFloor)    //Eh parede
-                            screen[(int)fEyeY * nScreenWidth + i] = '#';
+                            screen[j * nScreenWidth + i] = '#';
                         else                                    //Eh chao
-                            screen[(int)fEyeY * nScreenWidth + i] = '.';
+                            screen[j * nScreenWidth + i] = ' ';
                     }
 
                 }
-            } while (true);
+
+                //Imprime
+                Console.Write(screen);
+
+
+            }
 
         }
     }
