@@ -24,3 +24,4 @@ C:\Users\usuario\Desktop\GitHub\Doom\Doom\obj\Debug\netcoreapp3.1\Doom.csproj.Co
 C:\Users\usuario\Desktop\GitHub\Doom\Doom\obj\Debug\netcoreapp3.1\Doom.dll
 C:\Users\usuario\Desktop\GitHub\Doom\Doom\obj\Debug\netcoreapp3.1\Doom.pdb
 C:\Users\usuario\Desktop\GitHub\Doom\Doom\obj\Debug\netcoreapp3.1\Doom.genruntimeconfig.cache
+C:\Users\usuario\Desktop\GitHub\Doom\Doom\obj\Debug\netcoreapp3.1\Doom.csproj.ResolveComReference.cache

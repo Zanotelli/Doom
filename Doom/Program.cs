@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Text;
 using System.IO;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Doom
 {
@@ -24,15 +30,23 @@ namespace Doom
         public static float fFOV = 3.14159f/4;  //90º
         public static float fDepth = 16.0f;     //Distancia de visao
 
-        public static ConsoleKeyInfo keyIn;
+        //public static ConsoleKeyInfo keyIn;
+
+        public static char[] screen = new char[nScreenWidth * nScreenHeight];
+
+
+        [DllImport("User32.dll")]
+        private static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
 
         public static void Main()
         {
-            StringBuilder screen = new StringBuilder(nScreenWidth * nScreenHeight);
-            for (int a = 0; a < nScreenWidth * nScreenHeight; a++)
-                screen.Append(' ');
+            //StringBuilder screen = new StringBuilder(nScreenWidth * nScreenHeight);
+            //for (int a = 0; a < nScreenWidth * nScreenHeight; a++)
+            //    screen.Append(' ');
 
+            
 
+            //string.Format(formattedDate, "%02d/%02d/%02d", Month, Day, Year);
 
             Console.SetWindowSize(nScreenWidth, nScreenHeight);
             Console.SetBufferSize(nScreenWidth, nScreenHeight);
@@ -40,17 +54,17 @@ namespace Doom
 
             StringBuilder map = new StringBuilder(nMapW * nMapH);
             map.Append("################");
+            map.Append("##.............#");
+            map.Append("##.............#");
+            map.Append("##.............#");
             map.Append("#..............#");
             map.Append("#..............#");
             map.Append("#..............#");
-            map.Append("#..............#");
-            map.Append("#..............#");
-            map.Append("#..............#");
-            map.Append("#..............#");
-            map.Append("#..............#");
-            map.Append("#..............#");
-            map.Append("#..............#");
-            map.Append("#..............#");
+            map.Append("#.............##");
+            map.Append("#.............##");
+            map.Append("##............##");
+            map.Append("##.............#");
+            map.Append("##.............#");
             map.Append("#..............#");
             map.Append("#..............#");
             map.Append("#..............#");
@@ -61,7 +75,7 @@ namespace Doom
 
             while(true)
             {
-                Console.Clear();
+                Console.CursorVisible = false;
 
 
                 for (int i = 0; i < nScreenWidth; i++)
@@ -121,6 +135,7 @@ namespace Doom
 
                 }
 
+                Console.Clear();
                 //Imprime
                 Console.Write(screen);
 
